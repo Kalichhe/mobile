@@ -1,11 +1,11 @@
-import { PokemonCard } from '../components/PokemonCard';
-import { useInfiniteQuery } from '@tanstack/react-query';
-import { AllPokemon, fetchAllPokemon } from '../utils/api';
-import { Center, Spinner, FlatList } from 'native-base';
+import { PokemonCard } from "../components/PokemonCard";
+import { useInfiniteQuery } from "@tanstack/react-query";
+import { AllPokemon, fetchAllPokemon } from "../utils/api";
+import { Center, Spinner, FlatList } from "native-base";
 
 export function Home() {
   const { data, isLoading, hasNextPage, fetchNextPage, isFetchingNextPage } =
-    useInfiniteQuery<AllPokemon>(['pokemons'], fetchAllPokemon, {
+    useInfiniteQuery<AllPokemon>(["pokemons"], fetchAllPokemon, {
       getNextPageParam: (lastPage) => lastPage.next,
     });
 
@@ -34,7 +34,7 @@ export function Home() {
       ListFooterComponent={() =>
         isFetchingNextPage ? <Spinner mt="4" size="lg" color="black" /> : null
       }
-      _contentContainerStyle={{ p: 2, bg: 'white' }}
+      _contentContainerStyle={{ p: 2, bg: "white" }}
     />
   );
 }

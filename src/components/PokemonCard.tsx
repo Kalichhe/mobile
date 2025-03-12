@@ -1,8 +1,8 @@
-import { ActivityIndicator } from 'react-native';
-import { useQuery } from '@tanstack/react-query';
-import { fetchFn, fetchPokemon, Pokemon } from '../utils/api';
-import { useNavigation } from '@react-navigation/native';
-import { MainStackScreenProps } from '../navigators/types';
+import { ActivityIndicator } from "react-native";
+import { useQuery } from "@tanstack/react-query";
+import { fetchFn, fetchPokemon, Pokemon } from "../utils/api";
+import { useNavigation } from "@react-navigation/native";
+import { MainStackScreenProps } from "../navigators/types";
 import {
   Box,
   Heading,
@@ -14,19 +14,19 @@ import {
   Pressable,
   Center,
   AspectRatio,
-} from 'native-base';
-import { formatNumber, getTypeColor } from '../utils/helper';
+} from "native-base";
+import { formatNumber, getTypeColor } from "../utils/helper";
 
 interface PokemonCardProps {
   name: string;
 }
 
 export function PokemonCard({ name }: PokemonCardProps) {
-  const { isLoading, error, data } = useQuery<Pokemon>(['pokemon', name], () =>
+  const { isLoading, error, data } = useQuery<Pokemon>(["pokemon", name], () =>
     fetchPokemon(name)
   );
   const navigation =
-    useNavigation<MainStackScreenProps<'Home'>['navigation']>();
+    useNavigation<MainStackScreenProps<"Home">["navigation"]>();
 
   if (isLoading)
     return (
@@ -41,15 +41,13 @@ export function PokemonCard({ name }: PokemonCardProps) {
       flex={1}
       m="1.5"
       p="4"
-      backgroundColor={getTypeColor(data.types[0].type.name) + '.500'}
-      borderRadius={10}
-      onPress={() => navigation.navigate('Detail', { name })}
-    >
+      backgroundColor={getTypeColor(data.types[0].type.name) + ".500"}
+      borderRadius={10}>
       <Center>
         <AspectRatio ratio={1} width="80%">
           <Image
             source={{
-              uri: data.sprites.other['official-artwork'].front_default,
+              uri: data.sprites.other["official-artwork"].front_default,
             }}
             alt="image"
           />
@@ -67,13 +65,12 @@ export function PokemonCard({ name }: PokemonCardProps) {
             key={type.type.name}
             px="2"
             mr="1"
-            backgroundColor={getTypeColor(type.type.name) + '.400'}
+            backgroundColor={getTypeColor(type.type.name) + ".400"}
             borderRadius={10}
             _text={{
-              color: 'white',
-              fontSize: 'xs',
-            }}
-          >
+              color: "white",
+              fontSize: "xs",
+            }}>
             {type.type.name}
           </Box>
         ))}
